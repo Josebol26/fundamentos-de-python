@@ -6,9 +6,12 @@ def enviar():
     nome = nome_var.get()
     senha = senha_var.get()
     
-    print("O nome é: " + nome)
-    print("A senha é: " + senha)
+    print("Email: " + nome)
+    print("Senha: " + senha)
     
+    # Atualiza o texto da label no frame2
+    lbl.config(text="Email: " + nome)
+    lbl2.config(text="Senha: " + senha)
     # Limpa os campos após o envio
     nome_var.set("")
     senha_var.set("")
@@ -17,34 +20,38 @@ janela = tk.Tk()
 janela.geometry("600x400")
 janela.title('Ler Entry')
 
-# Criando as variáveis de controle (com parênteses!)
+# Variáveis de controle
 nome_var = tk.StringVar()
 senha_var = tk.StringVar()
 
-# Criando um Frame (moldura) para organizar o layout
+# --- Frame 1 (Entrada de Dados) ---
 frame = tk.Frame(janela, bg="lightgreen", bd=5)
-frame.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.5)
+frame.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.4)
 
-# --- Widgets dentro do Frame ---
-
-# Rótulo e Campo de Entrada para o E-mail
 nome_label = tk.Label(frame, text='Digite seu e-mail:', font=('calibre', 10, 'bold'), bg="lightgreen")
 nome_entry = tk.Entry(frame, textvariable=nome_var, font=('calibre', 10, 'normal'))
 
-# Rótulo e Campo de Entrada para a Senha
 senha_label = tk.Label(frame, text='Digite sua senha:', font=('calibre', 10, 'bold'), bg="lightgreen")
 senha_entry = tk.Entry(frame, textvariable=senha_var, font=('calibre', 10, 'normal'), show='*')
 
-# Botão de Envio
-btn_enviar = tk.Button(frame, text='Enviar', command=enviar)
+btn_enviar = tk.Button(frame, text='Submit', command=enviar, bg="green", fg="white", font=("Arial", 12), width=10)
 
-# --- Organização usando Grid (Grade) dentro do Frame ---
-nome_label.grid(row=0, column=0, padx=10, pady=10, sticky="e")
-nome_entry.grid(row=0, column=1, padx=10, pady=10)
+# Layout do Frame 1
+nome_label.grid(row=0, column=0, padx=10, pady=5, sticky="e")
+nome_entry.grid(row=0, column=1, padx=10, pady=5)
+senha_label.grid(row=1, column=0, padx=10, pady=5, sticky="e")
+senha_entry.grid(row=1, column=1, padx=10, pady=5)
+btn_enviar.grid(row=2, column=1, pady=10)
 
-senha_label.grid(row=1, column=0, padx=10, pady=10, sticky="e")
-senha_entry.grid(row=1, column=1, padx=10, pady=10)
+# --- Frame 2 (Exibição do Resultado) ---
+frame2 = tk.Frame(janela, bg="lightgreen", bd=5)
+frame2.place(relx=0.1, rely=0.6, relwidth=0.8, relheight=0.3)
 
-btn_enviar.grid(row=2, column=1, pady=20)
+# Corrigido: adicionado 'tk.' antes de Label e posicionado com pack ou grid
+lbl = tk.Label(frame2, font=('calibri', 20, 'bold'), background='lightgreen', foreground='black')
+lbl.pack(expand=True, fill="both")
+lbl2 = tk.Label(frame2, font=('calibri', 20, 'bold'), background='lightgreen', foreground='black')
+lbl2.pack(expand=True, fill="both")
+
 
 janela.mainloop()
